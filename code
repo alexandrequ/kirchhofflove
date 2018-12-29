@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Plotly.js -->
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!-- Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
@@ -50,17 +50,18 @@
 
 <br>
 <br>
-  <div id="myDiv"></div>
-  <div id="myDiv2"></div>
+<div id="myDiv"></div>
+<div id="myDiv2"></div>
 <div id="myDiv3"></div>
 
 </body>
 <script>
 
 function kirchhoffNasa(){
-
-   ///////////
-    //Data
+    
+      ///////////
+     //  Data //
+    ///////////
     
     var E = document.getElementById("myForm").elements[0].value;
     var v = document.getElementById("myForm").elements[1].value;
@@ -69,10 +70,10 @@ function kirchhoffNasa(){
     var P = document.getElementById("myForm").elements[4].value;
     var N = document.getElementById("myForm").elements[5].value;
     var b = document.getElementById("myForm").elements[6].value;
-  
-
-var v =0.3;
-    var pi = Math.PI; 
+    
+    
+    var v =0.3;
+    var pi = Math.PI;
     var inter = a*100+1;
     var interh = h*100+1;
     var r = new Array();
@@ -103,7 +104,7 @@ var v =0.3;
     var rSrr = new Array();
     var rStt = new Array();
     var rSrt = new Array();
-        var rSrr0 = new Array();
+    var rSrr0 = new Array();
     var rStt0 = new Array();
     var rSrt0 = new Array();
     var Srr  = new Array();
@@ -139,394 +140,358 @@ var v =0.3;
     
     //Parametres
     var bn = [1, 0.5, 0.25, 0];
-  
-    //////////////////////////////
-    //         Partie 1         //
+    
+      //////////////////////////////
+     //         Partie 1         //
     //////////////////////////////
     
-
-            var p0 = P/(pi*b*b);
-            for (var i = 0; i<inter; i++){
-                // Probleme 0 \\
-                
-                if(r[i] >= b) {
-                    w0[i]= P/(16*pi*D)*((a*a-r[i]*r[i])*(2*(3+v)*a*a-(1-v)*b*b)/(2*(1+v)*a*a)-(b*b+2*r[i]*r[i])*Math.log(a/r[i]));
-                }
-                else{
-                    w0[i]= -(p0*(4*Math.pow(b,6)*v + 2*Math.pow(r[i],6)*v - 4*Math.pow(b,6) - 2*Math.pow(r[i],6) + 27*a*a*Math.pow(b,4) - 36*Math.pow(a,4)*b*b + 3*a*a*Math.pow(r[i],4)+ 3*a*a*Math.pow(b,4)*v - 12*Math.pow(a,4)*b*b*v - 9*a*a*Math.pow(r[i],4)*v + 12*a*a*b*b*Math.pow(r[i],2) + 12*a*a*Math.pow(b,4)*Math.log(a/b) + 12*a*a*b*b*Math.pow(r[i],2)*v + 12*a*a*Math.pow(b,4)*v*Math.log(a/b) + 24*a*a*b*b*Math.pow(r[i],2)*Math.log(a/b) + 24*a*a*b*b*Math.pow(r[i],2)*v*Math.log(a/b)))/(192*D*a*a*(v + 1));
-                }
-                if(b == 0){
-                    w0[i]= P/(8*pi*D)*((a*a-r[i]*r[i])*(3+v)/(2*(1+v))-Math.log(a/r[i]));
-                }
-                
-                if(b == 0){//Cas d'une charge pontuelle
-                    w0[i]=  P/(8*pi*D)*((a*a-Math.pow(r[i],2))*(3+v)/(2*(1+v))+Math.pow(r[i],2)*Math.log(r[i]/a));
-                    if(r[i] == 0){
-                        w0[i]=  P/(8*pi*D)*((a*a-r[i]*r[i])*(3+v)/(2*(1+v)));
-                    }
-                }
-                //////// Probleme 1 & 2 ////////
-                var sum0 = 0;
-                var sumS = 0;
-                var c1 = 0;
-                var tol = 10;
-                
-                while(tol>0.000001){
-                    c1=c1+1;
-                    var n = c1*N;
-                    var oldsum = sum0;
-                    var oldsumS = sumS;
-                    
-                    sum0=oldsum + (1/((n-1)*n)+2*(1+v)/((1-v)*(n-1)*n*n)-(Math.pow(r[i]/a,2))/(n*(n+1)))*Math.pow(r[i]/a,n)*Math.cos(n*theta);
-                    
+    
+    var p0 = P/(pi*b*b);
+    for (var i = 0; i<inter; i++){
+        // Probleme 0 \\
         
-                    sumS=oldsumS + (1/((n-1)*n)*(1/(n+1)+(1+v)/((1-v)*n)));
-                    
-                    var max0 = Math.abs(sum0-oldsum);
-                    var maxS = Math.abs(sumS-oldsumS);
-                    tol = Math.max(max0, maxS) ;
-                }
-                
-                w1[i]=  -T*Math.pow(a,3)/(D*(3+v))*sum0;
-                w2[i]=  ((2*T*Math.pow(a,3))/(D*(3+v))*sumS);
-            
-            
-            
-            
+        if(r[i] >= b) {
+            w0[i]= P/(16*pi*D)*((a*a-r[i]*r[i])*(2*(3+v)*a*a-(1-v)*b*b)/(2*(1+v)*a*a)-(b*b+2*r[i]*r[i])*Math.log(a/r[i]));
+        }
+        else{
+            w0[i]= -(p0*(4*Math.pow(b,6)*v + 2*Math.pow(r[i],6)*v - 4*Math.pow(b,6) - 2*Math.pow(r[i],6) + 27*a*a*Math.pow(b,4) - 36*Math.pow(a,4)*b*b + 3*a*a*Math.pow(r[i],4)+ 3*a*a*Math.pow(b,4)*v - 12*Math.pow(a,4)*b*b*v - 9*a*a*Math.pow(r[i],4)*v + 12*a*a*b*b*Math.pow(r[i],2) + 12*a*a*Math.pow(b,4)*Math.log(a/b) + 12*a*a*b*b*Math.pow(r[i],2)*v + 12*a*a*Math.pow(b,4)*v*Math.log(a/b) + 24*a*a*b*b*Math.pow(r[i],2)*Math.log(a/b) + 24*a*a*b*b*Math.pow(r[i],2)*v*Math.log(a/b)))/(192*D*a*a*(v + 1));
+        }
+        if(b == 0){
+            w0[i]= P/(8*pi*D)*((a*a-r[i]*r[i])*(3+v)/(2*(1+v))-Math.log(a/r[i]));
         }
         
+        if(b == 0){//Cas d'une charge pontuelle
+            w0[i]=  P/(8*pi*D)*((a*a-Math.pow(r[i],2))*(3+v)/(2*(1+v))+Math.pow(r[i],2)*Math.log(r[i]/a));
+            if(r[i] == 0){
+                w0[i]=  P/(8*pi*D)*((a*a-r[i]*r[i])*(3+v)/(2*(1+v)));
+            }
+        }
+        //////// Probleme 1 & 2 ////////
+        var sum0 = 0;
+        var sumS = 0;
+        var c1 = 0;
+        var tol = 10;
+        
+        while(tol>0.000001){
+            c1=c1+1;
+            var n = c1*N;
+            var oldsum = sum0;
+            var oldsumS = sumS;
+            
+            sum0=oldsum + (1/((n-1)*n)+2*(1+v)/((1-v)*(n-1)*n*n)-(Math.pow(r[i]/a,2))/(n*(n+1)))*Math.pow(r[i]/a,n)*Math.cos(n*theta);
+            
+            
+            sumS=oldsumS + (1/((n-1)*n)*(1/(n+1)+(1+v)/((1-v)*n)));
+            
+            var max0 = Math.abs(sum0-oldsum);
+            var maxS = Math.abs(sumS-oldsumS);
+            tol = Math.max(max0, maxS) ;
+        }
+        
+        w1[i]=  -T*Math.pow(a,3)/(D*(3+v))*sum0;
+        w2[i]=  ((2*T*Math.pow(a,3))/(D*(3+v))*sumS);
+    }
+
+    ////// Probleme original ///////
+    for(var k = 0; k<4; k++) {
+        for (var i = 0; i<100; i++){
+            w[i]= w0[i]+w1[i]+w2[i];
+        }}
     
-
-
-
-
-
-////// Probleme original ///////
-for(var k = 0; k<4; k++) {
-            for (var i = 0; i<100; i++){
-w[i]= w0[i]+w1[i]+w2[i];
-}}
-
-
-
 
     /////////////////////////////
     //          Partie 2       //
     /////////////////////////////
-
+    
     var d2wdr2_0;
     var d2wdrdt_0;
-       
-        
 
+    for(var i=0; i<100; i++){
+
+        /////// Problem 0 \\\\\
+        d2wdrdt_0 = 0;
+        var d2wdt2_0 = 0;
+        var dwdt_0 = 0;
+        var dwdr_0 = 0;
+
+        if(r[i] >= b){
             
+            dwdr_0 = -(P*(4*r[i]*Math.log(a/r[i]) - (b*b + 2*Math.pow(r[i],2))/r[i] + (2*r[i]*((2*v + 6)*Math.pow(a,2) + (v - 1)*b*b))/(Math.pow(a,2)*(2*v + 2))))/(16*D*pi);
+            var d2wdr2_0 = -(P*(4*Math.log(a/r[i]) + (b*b + 2*Math.pow(r[i],2))/Math.pow(r[i],2) + (2*((2*v + 6)*Math.pow(a,2) + (v - 1)*b*b))/(Math.pow(a,2)*(2*v + 2)) - 8))/(16*D*pi);
             
-            for(var i=0; i<100; i++){
-                
-                
-                /////// Problem 0 \\\\\
-                d2wdrdt_0 = 0;
-                var d2wdt2_0 = 0;
-                var dwdt_0 = 0;
-                var dwdr_0 = 0;
-               
-                
-                if(r[i] >= b){
-                    
-                    dwdr_0 = -(P*(4*r[i]*Math.log(a/r[i]) - (b*b + 2*Math.pow(r[i],2))/r[i] + (2*r[i]*((2*v + 6)*Math.pow(a,2) + (v - 1)*b*b))/(Math.pow(a,2)*(2*v + 2))))/(16*D*pi);
-                    var d2wdr2_0 = -(P*(4*Math.log(a/r[i]) + (b*b + 2*Math.pow(r[i],2))/Math.pow(r[i],2) + (2*((2*v + 6)*Math.pow(a,2) + (v - 1)*b*b))/(Math.pow(a,2)*(2*v + 2)) - 8))/(16*D*pi);
-                    
-                    Qr_0[i]= -P/(2*pi*r[i]);
-                  
-                }
-                else if(r[i] < b){
-                    
-                    var dwdr_0 = -(p0*r[i]*(Math.pow(b,4)*v - Math.pow(b,4) + 4*Math.pow(a,2)*b*b - Math.pow(a,2)*Math.pow(r[i],2) - Math.pow(a,2)*Math.pow(r[i],2)*v + 4*Math.pow(a,2)*b*b*Math.log(a/b) + 4*Math.pow(a,2)*b*b*v*Math.log(a/b)))/(16*D*Math.pow(a,2)*(v + 1));
-                   var d2wdr2_0 = -(p0*(Math.pow(b,4)*v - Math.pow(b,4) + 4*Math.pow(a,2)*b*b - 3*Math.pow(a,2)*Math.pow(r[i],2) - 3*Math.pow(a,2)*Math.pow(r[i],2)*v + 4*Math.pow(a,2)*b*b*Math.log(a/b) + 4*Math.pow(a,2)*b*b*v*Math.log(a/b)))/(16*D*Math.pow(a,2)*(v + 1));
-                    
-                    var d3wdr3_0 = (3*p0*r[i])/(8*D);
-                   
-                    Qr_0[i]= -D* ( d3wdr3_0 -1/Math.pow(r[i],2) * dwdr_0 + 1/r[i] * d2wdr2_0);
-                    
-                }
-                
-              
-                
-                
-                //////// Probleme 1 & 2 \\\\\\\
-                var sump2 = new Array();
-                var oldsump2 = new Array();
-                
-                for(var m =0; m<5;m++){
-                    sump2[m] = 0;
-                }
-                
-var c2 = 0;
-                var tol2 = 10;
-                var Qri = 0;
-                
-                while(tol2>0.0001){
-                    c2=c2+1;
-                    var n = c2*N;
-                    for(var m =0; m<5;m++){
-                        oldsump2[m] = sump2[m];
-                    }
-                    
-                    sump2[0] = oldsump2[0] + - (n*Math.cos(n*theta)*Math.pow((r[i]/a),(n - 1))*((2*v + 2)/(n*n*(n - 1)*(v - 1)) - 1/(n*(n - 1)) + r[i]*r[i]/(Math.pow(a,2)*n*(n + 1))))/a - (2*r[i]*Math.cos(n*theta)*Math.pow((r[i]/a),n))/(Math.pow(a,2)*n*(n + 1));
-                    sump2[1] = oldsump2[1] + -(Math.cos(n*theta)*Math.pow((r[i]/a),n)*(Math.pow(a,2)*n + 2*Math.pow(a,2)*v - n*r[i]*r[i] + 2*r[i]*r[i]*v + 2*Math.pow(a,2) - 2*r[i]*r[i] - Math.pow(a,2)*n*v + n*r[i]*r[i]*v))/(Math.pow(a,2)*n*r[i]*r[i]*(v - 1));
-                    sump2[2] = oldsump2[2] + n*Math.sin(n*theta)*Math.pow((r[i]/a),n)*((2*v + 2)/(n*n*(n - 1)*(v - 1)) - 1/(n*(n - 1)) + r[i]*r[i]/(Math.pow(a,2)*n*(n + 1)));
-                    sump2[3] = oldsump2[3] + n*n*Math.cos(n*theta)*Math.pow((r[i]/a),n)*((2*v + 2)/(n*n*(n - 1)*(v - 1)) - 1/(n*(n - 1)) + r[i]*r[i]/(Math.pow(a,2)*n*(n + 1)));
-                    sump2[4] = oldsump2[4] + (n*n*Math.sin(n*theta)*Math.pow((r[i]/a),(n-1))*((2*v + 2)/(n*n*(n - 1)*(v - 1)) - 1/(n*(n - 1)) + r[i]*r[i]/(Math.pow(a,2)*n*(n + 1))))/a + (2*r[i]*Math.sin(n*theta)*Math.pow((r[i]/a),n))/(Math.pow(a,2)*(n + 1));
-                                  
-                    Qri = Qri - T*Math.pow(a,3)/(v+3) * Math.cos(n*theta) *( (n*n +4*n+5)/(n+1) *Math.pow(r[i],(n-1))/Math.pow(a,(n+2)) +(n-1)*(Math.pow((r[i]),(n-3)) *(n+2*v-n*v+2))/(Math.pow(a,n)*n*(v-1)) + (n-n*n)*Math.pow((r[i]),(n-3))/Math.pow(a,n) *(r[i]*r[i]/(Math.pow(a,2)*(n+1)) -1/(n-1) +(2*v+2)/(n*(n-1)*(v-1))));
-                    
-                   
-                    var max2_1 =Math.abs(sump2[0]-oldsump2[0]);
-                    var max2_2 =Math.abs(sump2[1]-oldsump2[1]);
-                    var max2_3 =Math.abs(sump2[2]-oldsump2[2]);
-                    var max2_4 =Math.abs(sump2[3]-oldsump2[3]);
-                    var tolé1 = Math.max(max2_1,max2_2);
-                    var tolé2 = Math.max(max2_3,max2_4) ;
-                    
-                    tol2 = Math.max(tolé1,tolé2);
-                    
-                }
-                  
-                var dwdr_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[0];
-                var d2wdr2_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[1];
-                var dwdt_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[2];
-                var d2wdt2_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[3];
-                var d2wdrdt_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[4];
-                
-                
-                /////// Probleme original \\\\\\
-                dwdr = dwdr_1 +dwdr_0;
-                var d2wdr2 = d2wdr2_1 + d2wdr2_0;
-                var dwdt =dwdt_1 + dwdt_0;
-                var d2wdt2 = d2wdt2_1 + d2wdt2_0;
-                var d2wdrdt = d2wdrdt_1 + d2wdrdt_0;
-                
-                Mrr[i] = -D*(d2wdr2+v/r[i]*(1/r[i]*d2wdt2+dwdr));
-                Mtt[i] = -D*(1/r[i]*(1/r[i]*d2wdt2+dwdr)+v*d2wdr2);
-                Mrt[i] = -D*(1-v)*(-1/(r[i]*r[i])*dwdt+1/r[i]*d2wdrdt);
-                Qr_1[i] = Qri;
-                
-                
-                Qr[i] = Qr_0[i] + Qri;
-                 
-                /////// Cas simply supported \\\\\\\\\\\
-                Mrr0[i] = -D*(d2wdr2_0+v/r[i]*(1/r[i]*d2wdt2_0+dwdr_0));
-                
-                Mtt0[i] = -D*(1/r[i]*(1/r[i]*d2wdt2_0+dwdr_0)+v*d2wdr2_0);
-                
-                Mrt0[i] = -D*(1-v)*(-1/(r[i]*r[i])*dwdt_0+1/r[i]*d2wdrdt_0);
-                
-               
+            Qr_0[i]= -P/(2*pi*r[i]);
+            
+        }
+        else if(r[i] < b){
+            
+            var dwdr_0 = -(p0*r[i]*(Math.pow(b,4)*v - Math.pow(b,4) + 4*Math.pow(a,2)*b*b - Math.pow(a,2)*Math.pow(r[i],2) - Math.pow(a,2)*Math.pow(r[i],2)*v + 4*Math.pow(a,2)*b*b*Math.log(a/b) + 4*Math.pow(a,2)*b*b*v*Math.log(a/b)))/(16*D*Math.pow(a,2)*(v + 1));
+            var d2wdr2_0 = -(p0*(Math.pow(b,4)*v - Math.pow(b,4) + 4*Math.pow(a,2)*b*b - 3*Math.pow(a,2)*Math.pow(r[i],2) - 3*Math.pow(a,2)*Math.pow(r[i],2)*v + 4*Math.pow(a,2)*b*b*Math.log(a/b) + 4*Math.pow(a,2)*b*b*v*Math.log(a/b)))/(16*D*Math.pow(a,2)*(v + 1));
+            
+            var d3wdr3_0 = (3*p0*r[i])/(8*D);
+            
+            Qr_0[i]= -D* ( d3wdr3_0 -1/Math.pow(r[i],2) * dwdr_0 + 1/r[i] * d2wdr2_0);
+        }
+        
+        //////// Probleme 1 & 2 \\\\\\\
+        var sump2 = new Array();
+        var oldsump2 = new Array();
+        
+        for(var m =0; m<5;m++){
+            sump2[m] = 0;
+        }
+        
+        var c2 = 0;
+        var tol2 = 10;
+        var Qri = 0;
+        
+        while(tol2>0.0001){
+            c2=c2+1;
+            var n = c2*N;
+            for(var m =0; m<5;m++){
+                oldsump2[m] = sump2[m];
             }
-             
-               
-    
-    
+            
+            sump2[0] = oldsump2[0] + - (n*Math.cos(n*theta)*Math.pow((r[i]/a),(n - 1))*((2*v + 2)/(n*n*(n - 1)*(v - 1)) - 1/(n*(n - 1)) + r[i]*r[i]/(Math.pow(a,2)*n*(n + 1))))/a - (2*r[i]*Math.cos(n*theta)*Math.pow((r[i]/a),n))/(Math.pow(a,2)*n*(n + 1));
+            sump2[1] = oldsump2[1] + -(Math.cos(n*theta)*Math.pow((r[i]/a),n)*(Math.pow(a,2)*n + 2*Math.pow(a,2)*v - n*r[i]*r[i] + 2*r[i]*r[i]*v + 2*Math.pow(a,2) - 2*r[i]*r[i] - Math.pow(a,2)*n*v + n*r[i]*r[i]*v))/(Math.pow(a,2)*n*r[i]*r[i]*(v - 1));
+            sump2[2] = oldsump2[2] + n*Math.sin(n*theta)*Math.pow((r[i]/a),n)*((2*v + 2)/(n*n*(n - 1)*(v - 1)) - 1/(n*(n - 1)) + r[i]*r[i]/(Math.pow(a,2)*n*(n + 1)));
+            sump2[3] = oldsump2[3] + n*n*Math.cos(n*theta)*Math.pow((r[i]/a),n)*((2*v + 2)/(n*n*(n - 1)*(v - 1)) - 1/(n*(n - 1)) + r[i]*r[i]/(Math.pow(a,2)*n*(n + 1)));
+            sump2[4] = oldsump2[4] + (n*n*Math.sin(n*theta)*Math.pow((r[i]/a),(n-1))*((2*v + 2)/(n*n*(n - 1)*(v - 1)) - 1/(n*(n - 1)) + r[i]*r[i]/(Math.pow(a,2)*n*(n + 1))))/a + (2*r[i]*Math.sin(n*theta)*Math.pow((r[i]/a),n))/(Math.pow(a,2)*(n + 1));
+            
+            Qri = Qri - T*Math.pow(a,3)/(v+3) * Math.cos(n*theta) *( (n*n +4*n+5)/(n+1) *Math.pow(r[i],(n-1))/Math.pow(a,(n+2)) +(n-1)*(Math.pow((r[i]),(n-3)) *(n+2*v-n*v+2))/(Math.pow(a,n)*n*(v-1)) + (n-n*n)*Math.pow((r[i]),(n-3))/Math.pow(a,n) *(r[i]*r[i]/(Math.pow(a,2)*(n+1)) -1/(n-1) +(2*v+2)/(n*(n-1)*(v-1))));
+            
+            
+            var max2_1 =Math.abs(sump2[0]-oldsump2[0]);
+            var max2_2 =Math.abs(sump2[1]-oldsump2[1]);
+            var max2_3 =Math.abs(sump2[2]-oldsump2[2]);
+            var max2_4 =Math.abs(sump2[3]-oldsump2[3]);
+            var tolé1 = Math.max(max2_1,max2_2);
+            var tolé2 = Math.max(max2_3,max2_4) ;
+            
+            tol2 = Math.max(tolé1,tolé2);
+            
+        }
+        
+        var dwdr_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[0];
+        var d2wdr2_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[1];
+        var dwdt_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[2];
+        var d2wdt2_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[3];
+        var d2wdrdt_1 = T*Math.pow(a,3)/(D*(3+v))*sump2[4];
+        
+        
+        /////// Probleme original \\\\\\
+        dwdr = dwdr_1 +dwdr_0;
+        var d2wdr2 = d2wdr2_1 + d2wdr2_0;
+        var dwdt =dwdt_1 + dwdt_0;
+        var d2wdt2 = d2wdt2_1 + d2wdt2_0;
+        var d2wdrdt = d2wdrdt_1 + d2wdrdt_0;
+        
+        Mrr[i] = -D*(d2wdr2+v/r[i]*(1/r[i]*d2wdt2+dwdr));
+        Mtt[i] = -D*(1/r[i]*(1/r[i]*d2wdt2+dwdr)+v*d2wdr2);
+        Mrt[i] = -D*(1-v)*(-1/(r[i]*r[i])*dwdt+1/r[i]*d2wdrdt);
+        Qr_1[i] = Qri;
+        
+        
+        Qr[i] = Qr_0[i] + Qri;
+        
+        /////// Cas simply supported \\\\\\\\\\\
+        Mrr0[i] = -D*(d2wdr2_0+v/r[i]*(1/r[i]*d2wdt2_0+dwdr_0));
+        
+        Mtt0[i] = -D*(1/r[i]*(1/r[i]*d2wdt2_0+dwdr_0)+v*d2wdr2_0);
+        
+        Mrt0[i] = -D*(1-v)*(-1/(r[i]*r[i])*dwdt_0+1/r[i]*d2wdrdt_0);
   
+    }
+
+    
     //////////////////////////////
     //         Partie 3         //
     //////////////////////////////
-
-
-    //Stresses
- 
-        for(var u =0; u<interh ; u++){
-        
-            zi =z[u];
-            
-            for(var g = 0; g<inter ; g++){
-                Srrc[g]  = 12*zi/(Math.pow(h,3))*Mrr[g];
-                Sttc[g] = 12*zi/(Math.pow(h,3))*Mtt[g];
-                Srtc[g]  = 12*zi/(Math.pow(h,3))*Mrt[g];
-            }
-        }
-         
-        var maxMrr = Math.max(Math.abs(Mrr));
-        
-        var irr = indexOfMax(Mrr);
-        var maxMtt = Math.max(Math.abs(Mtt));
-        var itt = indexOfMax(Mtt);
-        var maxMrt = Math.max(Math.abs(Mrt));
-        var irt = indexOfMax(Mrt);
-        rSrr = r[irr];
-        rStt = r[itt];
-        rSrt = r[irt];
-
-                var v1 = new Array();
-                
-        for(var u = 0 ; u<interh ; u++){
-        
-            v1[u] = Math.abs(12*z[u]/(Math.pow(h,3)));
-            
-        }
-        var mv1 = Math.max(v1);
-        Srr  = mv1*maxMrr;
-        Stt = mv1*maxMtt;
-        Srt  = mv1*maxMrt;
-
-        
- var maxMrr0 = Math.max(Math.abs(Mrr0));
-        var irr0 = indexOfMax(Mrr0);
-        var maxMtt0 = Math.max(Math.abs(Mtt0));
-        var itt0 = indexOfMax(Mtt0);
-        var maxMrt0 = Math.max(Math.abs(Mrt0));
-        var irt0 = indexOfMax(Mrt0);
-        
-        rSrr0 = r[irr0];
-        rStt0 = r[itt0];
-        rSrt0 = r[irt0];
-        
-        Srr0  = mv1*maxMrr0;
-        Stt0 = mv1*maxMtt0;
-        Srt0  = mv1*maxMrt0;
-        
-        
-
     
+    
+    //Maximal Stress
+    
+    
+    zi =h/2;
+    
+    for(var g = 0; g<inter ; g++){
+        Srrc[g]  = 12*zi/(Math.pow(h,3))*Mrr[g];
+        Sttc[g] = 12*zi/(Math.pow(h,3))*Mtt[g];
+        Srtc[g]  = 12*zi/(Math.pow(h,3))*Mrt[g];
+    }
+    
+    var maxMrr = Math.max(Math.abs(Mrr));
+    
+    var irr = indexOfMax(Mrr);
+    var maxMtt = Math.max(Math.abs(Mtt));
+    var itt = indexOfMax(Mtt);
+    var maxMrt = Math.max(Math.abs(Mrt));
+    var irt = indexOfMax(Mrt);
+    rSrr = r[irr];
+    rStt = r[itt];
+    rSrt = r[irt];
+    
+    var v1 = new Array();
+    
+    for(var u = 0 ; u<interh ; u++){
+        
+        v1[u] = Math.abs(12*z[u]/(Math.pow(h,3)));
+        
+    }
+    var mv1 = Math.max(v1);
+    Srr  = mv1*maxMrr;
+    Stt = mv1*maxMtt;
+    Srt  = mv1*maxMrt;
+    
+    
+    var maxMrr0 = Math.max(Math.abs(Mrr0));
+    var irr0 = indexOfMax(Mrr0);
+    var maxMtt0 = Math.max(Math.abs(Mtt0));
+    var itt0 = indexOfMax(Mtt0);
+    var maxMrt0 = Math.max(Math.abs(Mrt0));
+    var irt0 = indexOfMax(Mrt0);
+    
+    rSrr0 = r[irr0];
+    rStt0 = r[itt0];
+    rSrt0 = r[irt0];
+    
+    Srr0  = mv1*maxMrr0;
+    Stt0 = mv1*maxMtt0;
+    Srt0  = mv1*maxMrt0;
     
     Srrcmax =  Math.max(Srr);
     Sttcmax = Math.max(Stt);
     Srtcmax = Math.max(Srt);
     
     
-   function indexOfMax(arr) {
-    if (arr.length === 0) {
-        return -1;
-    }
-
-    var max = arr[0];
-    var maxIndex = 0;
-
-    for (var i = 1; i < arr.length; i++) {
-        if (arr[i] > max) {
-            maxIndex = i;
-            max = arr[i];
+    function indexOfMax(arr) {
+        if (arr.length === 0) {
+            return -1;
         }
-    }
-
-    return maxIndex;
-};
+        
+        var max = arr[0];
+        var maxIndex = 0;
+        
+        for (var i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                maxIndex = i;
+                max = arr[i];
+            }
+        }
+        
+        return maxIndex;
+    };
     
-   
+    //////////////////////////////
+    //           Plot           //
+    //////////////////////////////
+    
     var trace1 = {
-x: r,
-y: w,
-name: 'ω(r/a,0)',
-type: 'scatter',
-};
-
-var trace2 = {
-x: r,
-y: w0,
-type: 'scatter',
-mode: 'lines',
-  name: 'ω0(r/a,0)',
-  line: {
+    x: r,
+    y: w,
+    name: 'ω(r/a,0)',
+    type: 'scatter',
+    };
+    
+    var trace2 = {
+    x: r,
+    y: w0,
+    type: 'scatter',
+    mode: 'lines',
+    name: 'ω0(r/a,0)',
+    line: {
     dash: 'dashdot',
     width: 4
-  }
-};
-
+    }
+    };
     
-   
     var trace1_2 = {
-x: r,
-y: Mrr,
-type: 'scatter',
-
-};
-
+    x: r,
+    y: Mrr,
+    type: 'scatter',
+    };
+    
     var trace1_3 = {
-x: r,
-y: Mtt,
-type: 'scatter',
-  xaxis: 'x2',
-  yaxis: 'y2',
-};
-
+    x: r,
+    y: Mtt,
+    type: 'scatter',
+    xaxis: 'x2',
+    yaxis: 'y2',
+    };
+    
     var trace1_4 = {
-x: r,
-y: Mrt,
-type: 'scatter',
-  xaxis: 'x3',
-  yaxis: 'y3',
-};
-
-      var trace1_5 = {
-x: r,
-y: Qr,
-type: 'scatter',
-  xaxis: 'x4',
-  yaxis: 'y4',
-};
-
-
+    x: r,
+    y: Mrt,
+    type: 'scatter',
+    xaxis: 'x3',
+    yaxis: 'y3',
+    };
+    
+    var trace1_5 = {
+    x: r,
+    y: Qr,
+    type: 'scatter',
+    xaxis: 'x4',
+    yaxis: 'y4',
+    };
+    
     var trace1_6 = {
-x: r,
-y: Srrc,
-type: 'scatter',
-name: 'σ_rr',
-  xaxis: 'x6',
-  yaxis: 'y6',
-};
-
-var trace2_6 = {
-x: r,
-y: Sttc,
-type: 'scatter',
-name: 'σ_θθ',
-  xaxis: 'x6',
-  yaxis: 'y6',
-};
-var trace3_6 = {
-x: r,
-y: Srtc,
-name: 'σ_rθ',
-type: 'scatter',
-  xaxis: 'x6',
-  yaxis: 'y6',
-};
-
-
-var data = [trace1, trace2]
-
-var layout = {
-  autosize: false,
-  width: 700,
-  height: 500,
-  title: 'Deflection ω(r/a,0)',
-  xaxis: {title: 'r/a'},
-  yaxis: {title: 'ω(r/a,0)'},
-};
-
-var layout3 = {
-  autosize: false,
-  width: 700,
-  height: 500,
-  title: 'Critical Stresses (σ max)',
-  xaxis: {title: 'r/a'},
-  yaxis: {title: 'σ max'},
-};
-Plotly.newPlot('myDiv', data , layout);
-
-
-var data2 = [trace1_2, trace1_3, trace1_4, trace1_5];
-
-var data3 = [trace1_6, trace2_6, trace3_6];
-
-var layout2 = {
-grid: {rows: 2, columns: 2, pattern: 'independent'},
-  autosize: false,
-};
-
-var gd = document.getElementById('myDiv2')
-Plotly.newPlot(gd, data2, layout2, {showSendToCloud: true});
-
+    x: r,
+    y: Srrc,
+    type: 'scatter',
+    name: 'σ_rr',
+    xaxis: 'x6',
+    yaxis: 'y6',
+    };
+    
+    var trace2_6 = {
+    x: r,
+    y: Sttc,
+    type: 'scatter',
+    name: 'σ_θθ',
+    xaxis: 'x6',
+    yaxis: 'y6',
+    };
+    var trace3_6 = {
+    x: r,
+    y: Srtc,
+    name: 'σ_rθ',
+    type: 'scatter',
+    xaxis: 'x6',
+    yaxis: 'y6',
+    };
+    
+    
+    
+    var layout = {
+    autosize: false,
+    width: 700,
+    height: 500,
+    title: 'Deflection ω(r/a,0)',
+    xaxis: {title: 'r/a'},
+    yaxis: {title: 'ω(r/a,0)'},
+    };
+    
+    var layout2 = {
+    grid: {rows: 2, columns: 2, pattern: 'independent'},
+    autosize: false,
+    };
+    
+    var layout3 = {
+    autosize: false,
+    width: 700,
+    height: 500,
+    title: 'Critical Stresses (σ max)',
+    xaxis: {title: 'r/a'},
+    yaxis: {title: 'σ max'},
+    };
+    
+    var data = [trace1, trace2]
+    var data2 = [trace1_2, trace1_3, trace1_4, trace1_5];
+    var data3 = [trace1_6, trace2_6, trace3_6];
+    
+    var gd = document.getElementById('myDiv2')
+    Plotly.newPlot('myDiv', data , layout);
+    Plotly.newPlot(gd, data2, layout2, {showSendToCloud: true});
     Plotly.newPlot('myDiv3', data3,layout3)
 };
 </script>
