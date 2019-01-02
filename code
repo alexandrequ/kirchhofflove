@@ -1,6 +1,6 @@
 
 
-
+<!-- Kirchhoff-love theory -- Alexandre Quintart -- January 2019 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +12,7 @@
 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+
 
 <div class="span3">
 
@@ -38,26 +39,29 @@
 <label>Radius of the surface where is applied the load b : </label>
 <input type="number" name="b" class="span3" value="0.5"><br>
 
+Download results file : <input type="checkbox" name="results" id="myCheck" unchecked>
 
 </form>
 
 
-<button onclick="kirchhoffNasa()">Simulate</button>
+<button onclick="kirchhoffNasa()">Simulate</button><br><br>
 
+<button onclick="kirchhoffNasa(1,1,1)">Save graphs</button>
 
 <body>
 <br>
 
 <br>
 <br>
+<div align="center"
 <div id="myDiv"></div>
 <div id="myDiv2"></div>
 <div id="myDiv3"></div>
-
+</div>
 </body>
 <script>
 
-function kirchhoffNasa(){
+function kirchhoffNasa(img1,img2,img3){
     
       ///////////
      //  Data //
@@ -70,7 +74,7 @@ function kirchhoffNasa(){
     var P = document.getElementById("myForm").elements[4].value;
     var N = document.getElementById("myForm").elements[5].value;
     var b = document.getElementById("myForm").elements[6].value;
-    
+    var csv = document.getElementById("myForm").elements[7].checked;
     
     var v =0.3;
     var pi = Math.PI;
@@ -193,10 +197,9 @@ function kirchhoffNasa(){
     }
 
     ////// Probleme original ///////
-    for(var k = 0; k<4; k++) {
         for (var i = 0; i<100; i++){
             w[i]= w0[i]+w1[i]+w2[i];
-        }}
+        }
     
 
     /////////////////////////////
@@ -408,12 +411,14 @@ function kirchhoffNasa(){
     x: r,
     y: Mrr,
     type: 'scatter',
+    name: 'Mrr',
     };
     
     var trace1_3 = {
     x: r,
     y: Mtt,
     type: 'scatter',
+    name: 'Mtt',
     xaxis: 'x2',
     yaxis: 'y2',
     };
@@ -422,6 +427,7 @@ function kirchhoffNasa(){
     x: r,
     y: Mrt,
     type: 'scatter',
+    name: 'Mrt',
     xaxis: 'x3',
     yaxis: 'y3',
     };
@@ -429,6 +435,7 @@ function kirchhoffNasa(){
     var trace1_5 = {
     x: r,
     y: Qr,
+    name: 'Qr',
     type: 'scatter',
     xaxis: 'x4',
     yaxis: 'y4',
@@ -474,6 +481,13 @@ function kirchhoffNasa(){
     var layout2 = {
     grid: {rows: 2, columns: 2, pattern: 'independent'},
     autosize: false,
+    yaxis1: {title: 'Mrr'},
+    yaxis2: {title: 'Mtt'},
+    yaxis3: {title: 'Mrt'},
+    yaxis4: {title: 'Qr'},
+    xaxis3: {title: 'r/a'},
+    xaxis4: {title: 'r/a'},
+    title: 'Internal Loads',
     };
     
     var layout3 = {
@@ -481,8 +495,8 @@ function kirchhoffNasa(){
     width: 700,
     height: 500,
     title: 'Critical Stresses (σ max)',
-    xaxis: {title: 'r/a'},
-    yaxis: {title: 'σ max'},
+    yaxis: {title: 'r/a'},
+    yaxis: {title: 'σ_max'},
     };
     
     var data = [trace1, trace2]
@@ -490,8 +504,39 @@ function kirchhoffNasa(){
     var data3 = [trace1_6, trace2_6, trace3_6];
     
     var gd = document.getElementById('myDiv2')
-    Plotly.newPlot('myDiv', data , layout);
-    Plotly.newPlot(gd, data2, layout2, {showSendToCloud: true});
-    Plotly.newPlot('myDiv3', data3,layout3)
+    Plotly.newPlot('myDiv', data , layout, {modeBarButtonsToRemove: ['toImage','hoverCompareCartesian','hoverClosestCartesian','resetScale2d','resetScale2d'],displaylogo: false});
+    Plotly.newPlot('myDiv2', data2, layout2, {modeBarButtonsToRemove: ['toImage','hoverCompareCartesian','hoverClosestCartesian','resetScale2d','resetScale2d'],displaylogo: false});
+    Plotly.newPlot('myDiv3', data3, layout3,{modeBarButtonsToRemove: ['toImage','hoverCompareCartesian','hoverClosestCartesian','resetScale2d','resetScale2d'],displaylogo: false});
+ 
+ /////// Create a csv file \\\\\\\\\
+    if(csv == true)
+    {
+    const rows = [["r",r], ["ω0",w0],["ω",w],["Mrr",Mrr],["Mtt",Mtt],["Mrt",Mrt],["Qr",Qr],["σ_rr",Srrc],["σ_θθ",Sttc],["σ_rθ",Srtc]];
+let csvContent = "data:text/csv;charset=utf-8,";
+rows.forEach(function(rowArray){
+   let row = rowArray.join(",");
+   csvContent += row + "\r\n";
+}); 
+var encodedUri = encodeURI(csvContent);
+var link = document.createElement("a");
+link.setAttribute("href", encodedUri);
+link.setAttribute("download", "kirchhofflove.csv");
+document.body.appendChild(link); // Required for FF
+
+link.click(); // This will download the data file named "my_data.csv".
+    };
+
+ /////// Create png files\\\\\\\\\
+        if (img1 == 1){
+        Plotly.downloadImage('myDiv', {format: 'png', width: 800, height: 600, filename: 'Deflection'});
+        }
+     if (img2 == 1){
+        Plotly.downloadImage('myDiv2', {format: 'png', width: 800, height: 600, filename: 'Internal_Loads'});
+        }
+    if (img3 == 1){
+        Plotly.downloadImage('myDiv3', {format: 'png', width: 800, height: 600, filename: 'Critical_Stress'});
+        }
+
+
 };
 </script>
