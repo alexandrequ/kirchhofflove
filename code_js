@@ -108,7 +108,7 @@ Graph File Names : <br><br>
 <form id="myFile">
 Deflection Graph : <input type="string" name="E" class="span3" value="Deflection"> <br>
 Internal Loads Graph : <input type="string" name="E" class="span3" value="Internal_Loads"> <br>
-Critical Stresses Graph : <input type="string" name="E" class="span3" value="Critical_Stress"> <br>
+Critical Stresses Graph : <input type="string" name="E" class="span3" value="Critical_Stresses"> <br>
 </form>
 
 <br>Format : <br><br>
