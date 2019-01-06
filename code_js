@@ -10,22 +10,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* Create two equal columns that floats next to each other */
 .column {
-    float: left;
-width: 50%;
-    
-    
+  float: left;
+  width: 50%;
+
+
 }
 
 /* Clear floats after the columns */
 .row:after {
-content: "";
-display: table;
-clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 </style>
 </head>
@@ -37,7 +37,7 @@ clear: both;
 
 <div class="row">
 <div style="margin: 25px;">
-<form id="myForm">
+<form id="myForm" action="/action_page.php">
 <b>Parameters : </b> <br><br>
 <label>Young’s modulus E :  </label>
 <input type="number" name="E" class="span3" value="210e9"> <br><br>
@@ -64,48 +64,48 @@ File name : <input type="string" name="csvnme" class="span3" value="kirchhofflov
 </form><br>
 <br>
 <div class="column">
-<b>Layout : </b><br><br>
+<b>Layout : </b><br><br> 
 Style of lines : <br><br>
-First line :
+First line : 
 <select id="fl" >
-<option value="solid">Default</option>
-<option value="solid">Solid</option>
-<option value="dot">Dot</option>
-<option value="dashdot">Dashdot</option>
+	<option value="solid">Default</option>
+  <option value="solid">Solid</option>
+  <option value="dot">Dot</option>
+  <option value="dashdot">Dashdot</option>
 </select><br>
-Second line :
+Second line : 
 
 <select id="f2" >
-<option value="dot">Default</option>
-<option value="solid">Solid</option>
-<option value="dot">Dot</option>
-<option value="dashdot">Dashdot</option>
-</select><br>
+	<option value="dot">Default</option>
+  <option value="solid">Solid</option>
+  <option value="dot">Dot</option>
+  <option value="dashdot">Dashdot</option>
+</select><br> 
 
-Third line :
+Third line : 
 
 <select id="f3" >
-<option value="dashdot">Default</option>
-<option value="solid">Solid</option>
-<option value="dot">Dot</option>
-<option value="dashdot">Dashdot</option>
+	<option value="dashdot">Default</option>
+  <option value="solid">Solid</option>
+  <option value="dot">Dot</option>
+  <option value="dashdot">Dashdot</option>
 </select><br><br>
-Colors : <br> <br>
+Colors : <br> <br> 
 
-<form id="myColor">
-First color : <input type="color" name="cl" value="#ff0000"><br>
-Second color : <input type="color" name="c2" value="#00fe00"><br>
-Third color : <input type="color" name="c3" value="#0000ff"><br>
-Fourth color : <input type="color" name="c4" value="#959798"><br>
+<form id="myColor" action="/action_page.php">
+  First color : <input type="color" name="cl" value="#ff0000"><br>
+  Second color : <input type="color" name="c2" value="#00fe00"><br>
+  Third color : <input type="color" name="c3" value="#0000ff"><br>
+  Fourth color : <input type="color" name="c4" value="#959798"><br>
 </form>
 
 </div>
 
-
+ 
 <div class="column">
-<b>Saving : </b><br><br>
+<b>Saving : </b><br><br> 
 Graph File Names : <br><br>
-<form id="myFile">
+<form id="myFile" action="/action_page.php">
 Deflection Graph : <input type="string" name="E" class="span3" value="Deflection"> <br>
 Internal Loads Graph : <input type="string" name="E" class="span3" value="Internal_Loads"> <br>
 Critical Stresses Graph : <input type="string" name="E" class="span3" value="Critical_Stresses"> <br>
@@ -113,12 +113,12 @@ Critical Stresses Graph : <input type="string" name="E" class="span3" value="Cri
 
 <br>Format : <br><br>
 <form id="myForm2" action="" method="post">
-<input type="radio" name="format" value="png" checked="checked" /> png
-<input type="radio" name="format" value="jpeg" /> jpeg
-<input type="radio" name="format" value="svg" /> svg
+  <input type="radio" name="joke" value="png" checked="checked" /> png
+  <input type="radio" name="joke" value="jpeg" /> jpeg
+  <input type="radio" name="joke" value="svg" /> svg
 </form><br><br>
 
-<br>
+<br> 
 
 <button onclick="kirchhoffNasa()">Preview</button>
 <button onclick="kirchhoffNasa(1,1,1)">Save graphs</button><br>
@@ -138,8 +138,8 @@ Critical Stresses Graph : <input type="string" name="E" class="span3" value="Cri
 
 function kirchhoffNasa(img1,img2,img3){
     
-    ///////////
-    //  Data //
+      ///////////
+     //  Data //
     ///////////
     
     var E = document.getElementById("myForm").elements[0].value;
@@ -151,29 +151,29 @@ function kirchhoffNasa(img1,img2,img3){
     var b = document.getElementById("myForm").elements[6].value;
     var csv = document.getElementById("myForm").elements[7].checked;
     var nameCSV = document.getElementById("myForm").elements[8].value;
-    var form = document.querySelector('input[name="format"]:checked').value;
+	var form = document.querySelector('input[name="joke"]:checked').value;
     var l1= document.getElementById("fl").value;
-    var l2= document.getElementById("f2").value;
+	var l2= document.getElementById("f2").value;
     var l3= document.getElementById("f3").value;
     var col1= document.getElementById("myColor").elements[0].value;
-    var col2= document.getElementById("myColor").elements[1].value;
+	var col2= document.getElementById("myColor").elements[1].value;
     var col3= document.getElementById("myColor").elements[2].value;
-    var col4= document.getElementById("myColor").elements[3].value;
+    var col4= document.getElementById("myColor").elements[3].value;   
     var fname1= document.getElementById("myFile").elements[0].value;
-    var fname2= document.getElementById("myFile").elements[1].value;
+	var fname2= document.getElementById("myFile").elements[1].value;
     var fname3= document.getElementById("myFile").elements[2].value;
-    
+     
     var v =0.3;
     var pi = Math.PI;
-    var inter = a*100+1;
-    var interh = h*100+1;
+    var inter = a*100;
+    var interh = h*100;
     var r = new Array();
     //r[0] = 1/100;
     var z = new Array();
     for(var i = 0; i < interh; i++)
-        z[i] = -h/2 + i/100*h;
+        z[i] = -h/2 + i/100;
     for(var i = 0; i < inter; i++)
-        r[i] = i/100*a;
+        r[i] = i/100;
     
     var theta = 0;
     var D = E*Math.pow(h,3)/(12*(1 - Math.pow(v,2)));
@@ -231,8 +231,8 @@ function kirchhoffNasa(img1,img2,img3){
     //Parametres
     var bn = [1, 0.5, 0.25, 0];
     
-    //////////////////////////////
-    //         Partie 1         //
+      //////////////////////////////
+     //         Partie 1         //
     //////////////////////////////
     
     
@@ -281,28 +281,28 @@ function kirchhoffNasa(img1,img2,img3){
         w1[i]=  -T*Math.pow(a,3)/(D*(3+v))*sum0;
         w2[i]=  ((2*T*Math.pow(a,3))/(D*(3+v))*sumS);
     }
-    
+
     ////// Probleme original ///////
-    for (var i = 0; i<100; i++){
-        w[i]= w0[i]+w1[i]+w2[i];
-    }
+        for (var i = 0; i<inter; i++){
+            w[i]= w0[i]+w1[i]+w2[i];
+        }
     
-    
+
     /////////////////////////////
     //          Partie 2       //
     /////////////////////////////
     
     var d2wdr2_0;
     var d2wdrdt_0;
-    
-    for(var i=0; i<100; i++){
-        
+
+    for(var i=0; i<inter; i++){
+
         /////// Problem 0 \\\\\
         d2wdrdt_0 = 0;
         var d2wdt2_0 = 0;
         var dwdt_0 = 0;
         var dwdr_0 = 0;
-        
+
         if(r[i] >= b){
             
             dwdr_0 = -(P*(4*r[i]*Math.log(a/r[i]) - (b*b + 2*Math.pow(r[i],2))/r[i] + (2*r[i]*((2*v + 6)*Math.pow(a,2) + (v - 1)*b*b))/(Math.pow(a,2)*(2*v + 2))))/(16*D*pi);
@@ -388,9 +388,9 @@ function kirchhoffNasa(img1,img2,img3){
         Mtt0[i] = -D*(1/r[i]*(1/r[i]*d2wdt2_0+dwdr_0)+v*d2wdr2_0);
         
         Mrt0[i] = -D*(1-v)*(-1/(r[i]*r[i])*dwdt_0+1/r[i]*d2wdrdt_0);
-        
+  
     }
-    
+
     
     //////////////////////////////
     //         Partie 3         //
@@ -473,14 +473,15 @@ function kirchhoffNasa(img1,img2,img3){
     //////////////////////////////
     //           Plot           //
     //////////////////////////////
+
     
     var trace1 = {
     x: r,
     y: w,
-    name: 'ω(r/a,0)',
+    name: 'w(r/a,0)',
     type: 'scatter',
-    line: {
-    color: String(col1),
+        line: {
+                color: String(col1),
     dash: String(l1),
     width: 4
     }
@@ -491,9 +492,9 @@ function kirchhoffNasa(img1,img2,img3){
     y: w0,
     type: 'scatter',
     mode: 'lines',
-    name: 'ω0(r/a,0)',
+    name: 'w0(r/a,0)',
     line: {
-    color: String(col2),
+            color: String(col2),
     dash: String(l2),
     width: 4
     }
@@ -503,10 +504,10 @@ function kirchhoffNasa(img1,img2,img3){
     x: r,
     y: Mrr,
     type: 'scatter',
-    name: 'Mrr',
-    type: 'scatter',
-    line: {
-    color: String(col1),
+    name: 'Mrr (bending moment)',
+        type: 'scatter',
+        line: {
+                color: String(col1),
     dash: String(l1),
     width: 4
     }
@@ -516,12 +517,12 @@ function kirchhoffNasa(img1,img2,img3){
     x: r,
     y: Mtt,
     type: 'scatter',
-    name: 'Mtt',
+    name: 'Mtt (bending moment)',
     xaxis: 'x2',
     yaxis: 'y2',
-    type: 'scatter',
-    line: {
-    color: String(col2),
+        type: 'scatter',
+        line: {
+                color: String(col2),
     dash: String(l1),
     width: 4
     }
@@ -531,12 +532,12 @@ function kirchhoffNasa(img1,img2,img3){
     x: r,
     y: Mrt,
     type: 'scatter',
-    name: 'Mrt',
+    name: 'Mrt (bending moment)',
     xaxis: 'x3',
     yaxis: 'y3',
-    type: 'scatter',
-    line: {
-    color: String(col3),
+        type: 'scatter',
+        line: {
+                color: String(col3),
     dash: String(l1),
     width: 4
     }
@@ -545,13 +546,13 @@ function kirchhoffNasa(img1,img2,img3){
     var trace1_5 = {
     x: r,
     y: Qr,
-    name: 'Qr',
+    name: 'Qr (shear force)',
     type: 'scatter',
     xaxis: 'x4',
     yaxis: 'y4',
-    type: 'scatter',
-    line: {
-    color: String(col4),
+        type: 'scatter',
+        line: {
+        color: String(col4),
     dash: String(l1),
     width: 4
     },
@@ -564,9 +565,9 @@ function kirchhoffNasa(img1,img2,img3){
     name: 'σ_rr',
     xaxis: 'x6',
     yaxis: 'y6',
-    type: 'scatter',
-    line: {
-    color: String(col1),
+        type: 'scatter',
+        line: {        
+        color: String(col1),
     dash: String(l1),
     width: 4
     },
@@ -579,8 +580,8 @@ function kirchhoffNasa(img1,img2,img3){
     name: 'σ_θθ',
     xaxis: 'x6',
     yaxis: 'y6',
-    line: {
-    color: String(col2),
+        line: {
+                color: String(col2),
     dash: String(l2),
     width: 4
     }
@@ -592,8 +593,8 @@ function kirchhoffNasa(img1,img2,img3){
     type: 'scatter',
     xaxis: 'x6',
     yaxis: 'y6',
-    line: {
-    color: String(col3),
+            line: {
+                    color: String(col3),
     dash: String(l3),
     width: 4
     }
@@ -605,20 +606,20 @@ function kirchhoffNasa(img1,img2,img3){
     autosize: false,
     width: 700,
     height: 500,
-    title: 'Deflection ω(r/a,0)',
-    xaxis: {title: 'r/a'},
-    yaxis: {title: 'ω(r/a,0)'},
+    title: 'Deflection w(r,0)',
+    xaxis: {title: 'r [m]'},
+    yaxis: {title: 'w(r,0) [m]'},
     };
     
     var layout2 = {
     grid: {rows: 2, columns: 2, pattern: 'independent'},
     autosize: false,
-    yaxis1: {title: 'Mrr'},
-    yaxis2: {title: 'Mtt'},
-    yaxis3: {title: 'Mrt'},
-    yaxis4: {title: 'Qr'},
-    xaxis3: {title: 'r/a'},
-    xaxis4: {title: 'r/a'},
+    yaxis1: {title: 'Mrr [N m]'},
+    yaxis2: {title: 'Mtt [N m]'},
+    yaxis3: {title: 'Mrt [N m]'},
+    yaxis4: {title: 'Qr [N]'},
+    xaxis3: {title: 'r [m]'},
+    xaxis4: {title: 'r [m]'},
     title: 'Internal Loads',
     };
     
@@ -627,8 +628,8 @@ function kirchhoffNasa(img1,img2,img3){
     width: 700,
     height: 500,
     title: 'Critical Stresses (σ max)',
-    yaxis: {title: 'r/a'},
-    yaxis: {title: 'σ_max'},
+    xaxis6: {title: 'r[m]'},
+    yaxis6: {title: 'σ_max [Pa]'},
     };
     
     var data = [trace1, trace2]
@@ -637,49 +638,49 @@ function kirchhoffNasa(img1,img2,img3){
     
     var gd = document.getElementById('myDiv2')
     Plotly.newPlot('myDiv', data , layout, {modeBarButtonsToRemove: ['toImage','hoverCompareCartesian','hoverClosestCartesian','resetScale2d','resetScale2d'],displaylogo: false});
-    
+
     Plotly.newPlot('myDiv2', data2, layout2, {modeBarButtonsToRemove: ['toImage','hoverCompareCartesian','hoverClosestCartesian','resetScale2d','resetScale2d'],displaylogo: false});
     Plotly.newPlot('myDiv3', data3, layout3,{modeBarButtonsToRemove: ['toImage','hoverCompareCartesian','hoverClosestCartesian','resetScale2d','resetScale2d'],displaylogo: false});
-    
-    /////// Create a csv file \\\\\\\\\
+ 
+ /////// Create a csv file \\\\\\\\\
     if(csv == true)
     {
-        var sur = confirm("Download results as " + String(nameCSV)+".csv ?");
-        if( sur == true)
-        {
-            const rows = [["r",r], ["ω0",w0],["ω",w],["Mrr",Mrr],["Mtt",Mtt],["Mrt",Mrt],["Qr",Qr],["σ_rr",Srrc],["σ_θθ",Sttc],["σ_rθ",Srtc]];
-            let csvContent = "data:text/csv;charset=utf-8,";
-            rows.forEach(function(rowArray){
-                let row = rowArray.join(",");
-                csvContent += row + "\r\n";
-            });
-            var encodedUri = encodeURI(csvContent);
-            var link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", String(nameCSV) + ".csv");
-            document.body.appendChild(link); // Required for FF
-            
-            link.click(); // This will download the data file named "my_data.csv".
-        };
-    };
-    
-    /////// Create png files\\\\\\\\\
-    
-    if(img1 == 1 || img2 == 1 || img3 == 1 )
+    var sur = confirm("Download results as " + String(nameCSV)+".csv ?");
+    if( sur == true)
     {
-        var tele = confirm("Download the graphs ?");
-        if( tele == true)
-        {
-            if (img1 == 1){
-                Plotly.downloadImage('myDiv', {format: String(form), width: 800, height: 600, filename: String(fname1)});
-            }
-            if (img2 == 1){
-                Plotly.downloadImage('myDiv2', {format: String(form), width: 800, height: 600, filename: String(fname2)});
-            }
-            if (img3 == 1){
-                Plotly.downloadImage('myDiv3', {format: String(form), width: 800, height: 600, filename: String(fname3)});
-            }
+    const rows = [["r",r], ["ω0",w0],["ω",w],["Mrr",Mrr],["Mtt",Mtt],["Mrt",Mrt],["Qr",Qr],["σ_rr",Srrc],["σ_θθ",Sttc],["σ_rθ",Srtc]];
+let csvContent = "data:text/csv;charset=utf-8,";
+rows.forEach(function(rowArray){
+   let row = rowArray.join(",");
+   csvContent += row + "\r\n";
+}); 
+var encodedUri = encodeURI(csvContent);
+var link = document.createElement("a");
+link.setAttribute("href", encodedUri);
+link.setAttribute("download", String(nameCSV) + ".csv");
+document.body.appendChild(link); // Required for FF
+
+link.click(); // This will download the data file named "my_data.csv".
+};
+    };
+
+ /////// Create png files\\\\\\\\\
+ 
+ if(img1 == 1 || img2 == 1 || img3 == 1 )
+    {
+    var tele = confirm("Download the graphs ?");
+    if( tele == true)
+    {
+        if (img1 == 1){
+        Plotly.downloadImage('myDiv', {format: String(form), width: 800, height: 600, filename: String(fname1)});
+        }
+     if (img2 == 1){
+        Plotly.downloadImage('myDiv2', {format: String(form), width: 800, height: 600, filename: String(fname2)});
+        }
+	if (img3 == 1){
+        Plotly.downloadImage('myDiv3', {format: String(form), width: 800, height: 600, filename: String(fname3)});
+        }
         };};
-    
+
 };
 </script>
