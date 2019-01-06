@@ -113,9 +113,9 @@ Critical Stresses Graph : <input type="string" name="E" class="span3" value="Cri
 
 <br>Format : <br><br>
 <form id="myForm2" action="" method="post">
-<input type="radio" name="joke" value="png" checked="checked" /> png
-<input type="radio" name="joke" value="jpeg" /> jpeg
-<input type="radio" name="joke" value="svg" /> svg
+<input type="radio" name="format" value="png" checked="checked" /> png
+<input type="radio" name="format" value="jpeg" /> jpeg
+<input type="radio" name="format" value="svg" /> svg
 </form><br><br>
 
 <br>
@@ -151,7 +151,7 @@ function kirchhoffNasa(img1,img2,img3){
     var b = document.getElementById("myForm").elements[6].value;
     var csv = document.getElementById("myForm").elements[7].checked;
     var nameCSV = document.getElementById("myForm").elements[8].value;
-    var form = document.querySelector('input[name="joke"]:checked').value;
+    var form = document.querySelector('input[name="format"]:checked').value;
     var l1= document.getElementById("fl").value;
     var l2= document.getElementById("f2").value;
     var l3= document.getElementById("f3").value;
